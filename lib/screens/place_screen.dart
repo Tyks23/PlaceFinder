@@ -8,32 +8,33 @@ class PlaceScreen extends StatelessWidget {
   final HttpService httpService = HttpService();
   final Place place;
 
-
-  PlaceScreen({Key? key,
-    required this.place}) : super(key: key);
+  PlaceScreen({Key? key, required this.place}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("..."),
+        title: Text("Place Details"),
       ),
       body: FutureBuilder(
         future: httpService.getPhotos(id: place.id),
-
         builder: (BuildContext context, AsyncSnapshot<List<Photo>> snapshot) {
           if (snapshot.hasData) {
             List<Photo>? photos = snapshot.data;
             if (photos != null) {
               return ListView(
+                scrollDirection: Axis.horizontal,
                 children: photos
                     .map(
                       (Photo photo) => Image.network(
-                        photo.prefix != "0" ? "${photo.prefix}200x200${photo.suffix}" : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png",
+                        photo.prefix != "0"
+                            ? "${photo.prefix}200x200${photo.suffix}"
+                            : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png",
                         height: 200,
                         width: 200,
-                  ),
-                ).toList(),
+                      ),
+                    )
+                    .toList(),
               );
             } else {
               return const Center(child: LinearProgressIndicator());
