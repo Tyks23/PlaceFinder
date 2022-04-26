@@ -14,7 +14,7 @@ class PlaceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Place Details"),
+        title: Text(place.name),
       ),
       body: FutureBuilder(
         future: httpService.getPhotos(id: place.id),
