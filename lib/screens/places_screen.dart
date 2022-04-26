@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:place_finder/screens/place_screen.dart';
 
 import '../services/http_service.dart';
 import '../models/place_model.dart';
@@ -32,7 +33,14 @@ class PlacesScreen extends StatelessWidget {
                     .map(
                       (Place place) => ListTile(
                     title: Text(place.name),
-                    subtitle: Text(place.name),
+                    subtitle: place.address != "0" ? Text(place.address) : Text(place.locality),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PlaceScreen(
+                          place: place,
+                        ),
+                      ),
+                    ),
                   ),
                 )
                     .toList(),
