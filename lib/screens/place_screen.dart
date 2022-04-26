@@ -29,7 +29,7 @@ class PlaceScreen extends StatelessWidget {
                 children: photos
                     .map(
                       (Photo photo) => Image.network(
-                    "${photo.prefix}200x200${photo.suffix}",
+                        photo.prefix != "0" ? "${photo.prefix}200x200${photo.suffix}" : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png",
                         height: 200,
                         width: 200,
                   ),

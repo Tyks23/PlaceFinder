@@ -44,7 +44,7 @@ class HttpService {
           .toList();
       return photos;
     } else {
-      throw "Unable to retrieve places.";
+      throw "Unable to retrieve photos.";
     }
   }
 }

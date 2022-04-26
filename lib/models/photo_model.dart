@@ -11,7 +11,7 @@ class Photo {
   factory Photo.fromJson(Map<String, dynamic> json) {
     dynamic photoPrefix = json['prefix'] ?? "0";
     dynamic photoSuffix = json['suffix'] ?? "0";
-    print(photoSuffix);
+
     return Photo(
       prefix: photoPrefix,
       suffix: photoSuffix,
