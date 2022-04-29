@@ -28,23 +28,28 @@ class PlacesScreen extends StatelessWidget {
           if (snapshot.hasData) {
             List<Place>? places = snapshot.data;
             if (places != null) {
-              return ListView(
-                children: places
-                    .map(
-                      (Place place) => ListTile(
-                    title: Text(place.name),
-                    subtitle: place.address != "0" ? Text(place.address) : Text(place.locality),
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => PlaceScreen(
-                          place: place,
+              if(places.isEmpty){
+                return const Center(child: Text("No places found!"));
+              } else {
+                return ListView(
+                  children: places
+                      .map(
+                        (Place place) => ListTile(
+                      title: Text(place.name),
+                      subtitle: place.address != "0" ? Text(place.address) : Text(place.locality),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => PlaceScreen(
+                            place: place,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-                    .toList(),
-              );
+                  )
+                      .toList(),
+                );
+              }
+
             } else {
               return const Center(child: LinearProgressIndicator());
             }

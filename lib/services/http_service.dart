@@ -9,7 +9,7 @@ class HttpService {
   final String apiKey = "fsq35xr8oJ6LCUvHDtteDXuWKTLGJqvLzreyVEKYmjCGTWo=";
 
   Future<List<Place>> getPlaces( {category, location} ) async {
-    String placeQuery ="/search?query=${category.text}&near=${location.text}%2C%20EE";
+    String placeQuery ="/search?query=$category&near=${location.text}%2C%20EE";
 
 
     Response res =

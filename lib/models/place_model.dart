@@ -21,8 +21,8 @@ class Place {
 
   factory Place.fromJson(Map<String, dynamic> json) {
     dynamic placeId = json['fsq_id'] ?? "ID MISSING!!";
-    dynamic placeName = json['name'] ?? "Name not available!";
-    dynamic placeAddress = json['location']['address'] ?? "0";
+    dynamic placeName = json['name'] ?? "Name not available";
+    dynamic placeAddress = json['location']['address'] ?? "Address not available";
     dynamic placeFormattedAddress = json['location']['formatted_address'] ?? placeAddress;
     dynamic placeLocality = json['location']['locality'] ?? "0";
     dynamic placeLatitude = json['geocodes']['main']['latitude'] ?? "0";

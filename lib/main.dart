@@ -18,8 +18,8 @@ class _LandingScreen extends State<LandingScreen> {
 
 
   TextEditingController locationController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
 
+  String _typeValue = "";
 
   // This widget is the root of your application.
   @override
@@ -37,18 +37,42 @@ class _LandingScreen extends State<LandingScreen> {
                 decoration: const InputDecoration(
                     hintText: "Location....", labelText: 'Location'),
               ),
-              TextField(
-                controller: categoryController,
-                decoration: const InputDecoration(
-                    hintText: "Category....", labelText: 'Category'),
+            DropdownButton(
+              hint: _typeValue.isEmpty
+                  ? const Text('Type')
+                  : Text(
+                _typeValue,
+                style: const TextStyle(color: Colors.blue),
               ),
-              ElevatedButton(
-                child: const Text('Find restos'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  PlacesScreen(location: locationController, category: categoryController)),
+              isExpanded: true,
+              iconSize: 30.0,
+              style: const TextStyle(color: Colors.blue),
+              items: ['Sushi', 'Burger', 'Pizza', "Pasta"].map(
+                    (val) {
+                  return DropdownMenuItem<String>(
+                    value: val,
+                    child: Text(val),
                   );
+                },
+              ).toList(),
+              onChanged: (val) {
+                setState(
+                      () {
+                    _typeValue = val.toString();
+                  },
+                );
+              },
+            ),
+              ElevatedButton(
+                child: const Text('Search'),
+                onPressed: () {
+                  if(_typeValue.isNotEmpty && locationController.text.isNotEmpty){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>  PlacesScreen(location: locationController, category: _typeValue)),
+                    );
+                  }
+
                 },
               ),
             ],
