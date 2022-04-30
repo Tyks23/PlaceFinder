@@ -7,6 +7,8 @@ class Place {
   final String locality;
   final String latitude;
   final String longitude;
+  String prefix;
+  String suffix;
 
 
   Place({
@@ -17,6 +19,8 @@ class Place {
     required this.locality,
     required this.latitude,
     required this.longitude,
+    required this.prefix,
+    required this.suffix,
   });
 
   factory Place.fromJson(Map<String, dynamic> json) {
@@ -27,6 +31,8 @@ class Place {
     dynamic placeLocality = json['location']['locality'] ?? "0";
     dynamic placeLatitude = json['geocodes']['main']['latitude'] ?? "0";
     dynamic placeLongitude = json['geocodes']['main']['longitude'] ?? "0";
+    dynamic photoPrefix = json['prefix'] ?? "0";
+    dynamic photoSuffix = json['suffix'] ?? "0";
 
 
     return Place(
@@ -37,6 +43,8 @@ class Place {
       locality: placeLocality,
       latitude: placeLatitude.toString(),
       longitude: placeLongitude.toString(),
+      prefix: photoPrefix,
+      suffix: photoSuffix,
     );
   }
 }

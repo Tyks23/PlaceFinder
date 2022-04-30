@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'screens/places_screen.dart';
 
 void main() {
+
+  const primaryColor = Color(0xffd7ae9c);
+
   runApp(const MaterialApp(
     home: LandingScreen(),
   ));
@@ -15,8 +18,6 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreen extends State<LandingScreen> {
-
-
   TextEditingController locationController = TextEditingController();
 
   String _typeValue = "";
@@ -26,7 +27,7 @@ class _LandingScreen extends State<LandingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Place Finder'),
+        title: Text("PlaceFinder"),
       ),
         body: Container(
           margin: const EdgeInsets.only(left: 8.0, right: 8.0),
