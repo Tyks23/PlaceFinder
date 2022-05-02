@@ -24,7 +24,7 @@ class HttpService {
 
           )
           .toList();
-      print(photos);
+
       if(photos){
         for(dynamic place in places){
           List<Photo> placePhoto = await getOnePhoto(place.id);

@@ -12,7 +12,8 @@ class PlacesScreen extends StatefulWidget {
   PlacesScreen({
     Key? key,
     required this.location,
-    required this.category, required  this.photo,
+    required this.category,
+    required this.photo,
   }) : super(key: key);
 
   @override
@@ -29,11 +30,12 @@ class _PlacesScreen extends State<PlacesScreen> {
 
   _PlacesScreen({
     required this.location,
-    required this.category, required this.photo,
+    required this.category,
+    required this.photo,
   });
 
-  late final Future<List<Place>> _future =
-      httpService.getPlaces(location: location, category: category, photos: photo);
+  late final Future<List<Place>> _future = httpService.getPlaces(
+      location: location, category: category, photos: photo);
 
   @override
   Widget build(BuildContext context) {
@@ -53,58 +55,55 @@ class _PlacesScreen extends State<PlacesScreen> {
                 return ListView(
                   children: places
                       .map(
-                        (Place place) =>
-                            InkWell(
-                              child: Card(
-                                elevation: 50,
-                                shadowColor: Colors.white,
-                                // color: const Color(0xffefd3c8),
+                        (Place place) => InkWell(
+                          child: Card(
+                            elevation: 50,
+                            shadowColor: Colors.white,
+                            // color: const Color(0xffefd3c8),
 
-                                child: SizedBox(
-                                  width: 200,
-                                  height: 300,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          place.name,
-                                          style: const TextStyle(
-                                            fontSize: 30,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        Text(
-                                          place.formattedAddress,
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        place.suffix != "0" ? Image.network(
-                                          place.prefix != "0"
-                                              ? "${place.prefix}150x150${place.suffix}"
-                                              : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png",
-                                          width: 150,
-                                          height: 150,
-                                        ) : const Text(
-                                          ""
-                                        )],
+                            child: SizedBox(
+                              width: 200,
+                              height: 300,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      place.name,
+                                      style: const TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ),
-                              onTap: () => Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => PlaceScreen(
-                                    place: place,
-                                  ),
+                                    Text(
+                                      place.formattedAddress,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    place.suffix != "0"
+                                        ? Image.network(
+                                            "${place.prefix}150x150${place.suffix}",
+                                            width: 150,
+                                            height: 150,
+                                          )
+                                        : const Text("")
+                                  ],
                                 ),
                               ),
                             ),
-
+                          ),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PlaceScreen(
+                                place: place,
+                              ),
+                            ),
+                          ),
+                        ),
                       )
                       .toList(),
                 );
