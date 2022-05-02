@@ -7,16 +7,17 @@ import '../models/place_model.dart';
 class PlacesScreen extends StatefulWidget {
   var location;
   var category;
+  bool photo;
 
   PlacesScreen({
     Key? key,
     required this.location,
-    required this.category,
+    required this.category, required  this.photo,
   }) : super(key: key);
 
   @override
   _PlacesScreen createState() =>
-      _PlacesScreen(location: location, category: category);
+      _PlacesScreen(location: location, category: category, photo: photo);
 }
 
 class _PlacesScreen extends State<PlacesScreen> {
@@ -24,14 +25,15 @@ class _PlacesScreen extends State<PlacesScreen> {
 
   var category;
   var location;
+  bool photo;
 
   _PlacesScreen({
     required this.location,
-    required this.category,
+    required this.category, required this.photo,
   });
 
   late final Future<List<Place>> _future =
-      httpService.getPlaces(location: location, category: category);
+      httpService.getPlaces(location: location, category: category, photos: photo);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,8 @@ class _PlacesScreen extends State<PlacesScreen> {
                               child: Card(
                                 elevation: 50,
                                 shadowColor: Colors.white,
-                                color: const Color(0xffefd3c8),
+                                // color: const Color(0xffefd3c8),
+
                                 child: SizedBox(
                                   width: 200,
                                   height: 300,
@@ -68,18 +71,27 @@ class _PlacesScreen extends State<PlacesScreen> {
                                           place.name,
                                           style: const TextStyle(
                                             fontSize: 30,
-                                            color: Colors.white,
+                                            color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                        Image.network(
+                                        Text(
+                                          place.formattedAddress,
+                                          style: const TextStyle(
+                                            fontSize: 30,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        place.suffix != "0" ? Image.network(
                                           place.prefix != "0"
                                               ? "${place.prefix}150x150${place.suffix}"
                                               : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png",
                                           width: 150,
                                           height: 150,
-                                        ),
-                                      ],
+                                        ) : const Text(
+                                          ""
+                                        )],
                                     ),
                                   ),
                                 ),

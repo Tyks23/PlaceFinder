@@ -21,6 +21,7 @@ class _LandingScreen extends State<LandingScreen> {
   TextEditingController locationController = TextEditingController();
 
   String _typeValue = "";
+  bool _photoValue = false;
 
   // This widget is the root of your application.
   @override
@@ -64,16 +65,23 @@ class _LandingScreen extends State<LandingScreen> {
                 );
               },
             ),
+              CheckboxListTile(
+                title: const Text("Show place photo"),
+                  value: _photoValue,
+                  onChanged: (bool? value){
+                    setState(() {
+                      _photoValue = value!;
+                    });
+              }),
               ElevatedButton(
                 child: const Text('Search'),
                 onPressed: () {
                   if(_typeValue.isNotEmpty && locationController.text.isNotEmpty){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  PlacesScreen(location: locationController, category: _typeValue)),
+                      MaterialPageRoute(builder: (context) =>  PlacesScreen(location: locationController, category: _typeValue, photo: _photoValue)),
                     );
                   }
-
                 },
               ),
             ],

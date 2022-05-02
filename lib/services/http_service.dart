@@ -8,7 +8,7 @@ class HttpService {
       "https://api.foursquare.com/v3/places";
   final String apiKey = "fsq35xr8oJ6LCUvHDtteDXuWKTLGJqvLzreyVEKYmjCGTWo=";
 
-  Future<List<Place>> getPlaces( {category, location} ) async {
+  Future<List<Place>> getPlaces( {category, location, photos} ) async {
     String placeQuery ="/search?query=$category&near=${location.text}%2C%20EE";
 
 
@@ -24,12 +24,15 @@ class HttpService {
 
           )
           .toList();
-
-      for(dynamic place in places){
-        List<Photo> placePhoto = await getOnePhoto(place.id);
-        place.prefix = placePhoto[0].prefix;
-        place.suffix = placePhoto[0].suffix;
+      print(photos);
+      if(photos){
+        for(dynamic place in places){
+          List<Photo> placePhoto = await getOnePhoto(place.id);
+          place.prefix = placePhoto[0].prefix;
+          place.suffix = placePhoto[0].suffix;
+        }
       }
+
 
       return places;
     } else {
