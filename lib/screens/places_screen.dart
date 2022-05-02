@@ -78,7 +78,7 @@ class _PlacesScreen extends State<PlacesScreen> {
                                         Text(
                                           place.formattedAddress,
                                           style: const TextStyle(
-                                            fontSize: 30,
+                                            fontSize: 20,
                                             color: Colors.black,
                                             fontWeight: FontWeight.w500,
                                           ),
