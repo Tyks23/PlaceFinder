@@ -39,10 +39,16 @@ class _PlacesScreen extends State<PlacesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var primaryColor = const Color(0xffd7ae9c);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("PlaceFinder"),
+        backgroundColor: primaryColor,
+        centerTitle: true,
+        elevation: 0,
+        title: const Text("PlaceFinder",
+          style: TextStyle(fontSize: 26)),
       ),
+      backgroundColor: primaryColor,
       body: FutureBuilder(
         future: _future,
         builder: (BuildContext context, AsyncSnapshot<List<Place>> snapshot) {
@@ -57,13 +63,12 @@ class _PlacesScreen extends State<PlacesScreen> {
                       .map(
                         (Place place) => InkWell(
                           child: Card(
+                            margin: const EdgeInsets.all(30.0),
                             elevation: 50,
                             shadowColor: Colors.white,
-                            // color: const Color(0xffefd3c8),
 
                             child: SizedBox(
-                              width: 200,
-                              height: 300,
+                              height: 320,
                               child: Padding(
                                 padding: const EdgeInsets.all(20.0),
                                 child: Column(
@@ -84,13 +89,16 @@ class _PlacesScreen extends State<PlacesScreen> {
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    place.suffix != "0"
-                                        ? Image.network(
-                                            "${place.prefix}150x150${place.suffix}",
-                                            width: 150,
-                                            height: 150,
-                                          )
-                                        : const Text("")
+                                    Container(
+                                      margin: const EdgeInsets.only(top: 20.00),
+                                      child: place.suffix != "0"
+                                          ? Image.network(
+                                              "${place.prefix}200x200${place.suffix}",
+                                              width: 200,
+                                              height: 200,
+                                            )
+                                          : const Text("")
+                                        ),
                                   ],
                                 ),
                               ),
