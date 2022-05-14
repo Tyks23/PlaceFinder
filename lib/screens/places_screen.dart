@@ -62,7 +62,8 @@ class _PlacesScreen extends State<PlacesScreen> {
                   children: places
                       .map(
                         (Place place) => InkWell(
-                          child: Card(
+                          child: place.suffix != "0"
+                              ? Card(
                             margin: const EdgeInsets.all(30.0),
                             elevation: 50,
                             shadowColor: Colors.white,
@@ -79,7 +80,10 @@ class _PlacesScreen extends State<PlacesScreen> {
                                         fontSize: 30,
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500,
+
                                       ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
                                     ),
                                     Text(
                                       place.formattedAddress,
@@ -88,17 +92,53 @@ class _PlacesScreen extends State<PlacesScreen> {
                                         color: Colors.black,
                                         fontWeight: FontWeight.w500,
                                       ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
                                     ),
                                     Container(
                                       margin: const EdgeInsets.only(top: 20.00),
-                                      child: place.suffix != "0"
-                                          ? Image.network(
+                                      child: Image.network(
                                               "${place.prefix}200x200${place.suffix}",
                                               width: 200,
                                               height: 200,
                                             )
-                                          : const Text("")
                                         ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ) : Card(
+                            margin: const EdgeInsets.only(top: 20, right: 20, left: 20),
+                            elevation: 50,
+                            shadowColor: Colors.white,
+
+                            child: SizedBox(
+                              height: 100,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      place.name,
+                                      style: const TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                    Text(
+                                      place.formattedAddress,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+
                                   ],
                                 ),
                               ),
