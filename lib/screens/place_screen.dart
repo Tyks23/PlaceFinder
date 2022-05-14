@@ -12,10 +12,16 @@ class PlaceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var primaryColor = const Color(0xffd7ae9c);
     return Scaffold(
       appBar: AppBar(
-        title: Text(place.name),
+        backgroundColor: primaryColor,
+        centerTitle: true,
+        elevation: 0,
+        title: const Text("PlaceFinder",
+            style: TextStyle(fontSize: 26)),
       ),
+      backgroundColor: primaryColor,
       body: FutureBuilder(
         future: httpService.getPhotos(id: place.id),
         builder: (BuildContext context, AsyncSnapshot<List<Photo>> snapshot) {

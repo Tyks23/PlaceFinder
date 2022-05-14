@@ -4,8 +4,6 @@ import 'screens/places_screen.dart';
 
 void main() {
 
-  const primaryColor = Color(0xffd7ae9c);
-
   runApp(const MaterialApp(
     home: LandingScreen(),
   ));
@@ -31,60 +29,96 @@ class _LandingScreen extends State<LandingScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    var primaryColor = const Color(0xffd7ae9c);
+    var buttonColor = const Color(0xff795548);
     return Scaffold(
-      appBar: AppBar(
-        title: Text("PlaceFinder"),
-      ),
+        backgroundColor: primaryColor,
         body: Container(
-          margin: const EdgeInsets.only(left: 8.0, right: 8.0),
+          margin: const EdgeInsets.only(left: 40.0, right: 40.0, top: 50.00),
           child: Column(
             children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 50.0),
+                child: const Text(
+                    'PlaceFinder',
+                    style:
+                      TextStyle(
+                        color:
+                        Colors.white,
+                            fontFamily: '',
+                            fontSize: 42,)),
+                ),
               TextField(
                 controller: locationController,
                 decoration: const InputDecoration(
-                    hintText: "Location....", labelText: 'Location'),
+                  labelText: 'Location',
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
               ),
-            DropdownButton(
-              hint: _typeValue.isEmpty
-                  ? const Text('Type')
-                  : Text(
-                _typeValue,
-                style: const TextStyle(color: Colors.blue),
+              Container(
+                margin: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.white, //background color of dropdown button//border of dropdown button
+                      borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: DropdownButton(
+                    hint: _typeValue.isEmpty
+                        ? const Text('Type')
+                        : Text(
+                      _typeValue,
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                    isExpanded: true,
+                    icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                    iconSize: 30.0,
+                    style: const TextStyle(
+                      color: Colors.black),
+                    items: ['Sushi', 'Burger', 'Pizza', "Pasta"].map(
+                          (val) {
+                        return DropdownMenuItem<String>(
+                          value: val,
+                          child: Text(val),
+                        );
+                      },
+                    ).toList(),
+                    onChanged: (val) {
+                      setState(
+                            () {
+                          _typeValue = val.toString();
+                        },
+                      );
+                    },
+                  ),
+                ),
               ),
-              isExpanded: true,
-              iconSize: 30.0,
-              style: const TextStyle(color: Colors.blue),
-              items: ['Sushi', 'Burger', 'Pizza', "Pasta"].map(
-                    (val) {
-                  return DropdownMenuItem<String>(
-                    value: val,
-                    child: Text(val),
-                  );
-                },
-              ).toList(),
-              onChanged: (val) {
-                setState(
-                      () {
-                    _typeValue = val.toString();
-                  },
-                );
-              },
-            ),
               CheckboxListTile(
-                title: const Text("Show place photo"),
-                  value: _photoValue,
-                  onChanged: (bool? value){
-                    setState(() {
-                      _photoValue = value!;
-                    });
-              }),
+                title: const Text("Show place photo",
+                  style: TextStyle(color: Colors.white)),
+                value: _photoValue,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _photoValue = value!;
+                  });
+                }),
               ElevatedButton(
-                child: const Text('Search'),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
+                  fixedSize: MaterialStateProperty.all(const Size(160, 46)),
+                ),
+                child: const Text('Search',
+                  style: TextStyle(fontSize: 24),),
                 onPressed: () {
-                  if(_typeValue.isNotEmpty && locationController.text.isNotEmpty){
+                  if (_typeValue.isNotEmpty &&
+                      locationController.text.isNotEmpty) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>  PlacesScreen(location: locationController, category: _typeValue, photo: _photoValue)),
+                      MaterialPageRoute(
+                          builder: (context) => PlacesScreen(
+                              location: locationController,
+                              category: _typeValue,
+                              photo: _photoValue)),
                     );
                   }
                 },
