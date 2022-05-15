@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'screens/places_screen.dart';
 
 void main() {
-
   runApp(const MaterialApp(
     home: LandingScreen(),
   ));
@@ -39,15 +38,13 @@ class _LandingScreen extends State<LandingScreen> {
             children: [
               Container(
                 margin: const EdgeInsets.only(bottom: 50.0),
-                child: const Text(
-                    'PlaceFinder',
-                    style:
-                      TextStyle(
-                        color:
-                        Colors.white,
-                            fontFamily: '',
-                            fontSize: 42,)),
-                ),
+                child: const Text('PlaceFinder',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: '',
+                      fontSize: 42,
+                    )),
+              ),
               TextField(
                 controller: locationController,
                 decoration: const InputDecoration(
@@ -60,23 +57,24 @@ class _LandingScreen extends State<LandingScreen> {
                 margin: const EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    color: Colors.white, //background color of dropdown button//border of dropdown button
-                      borderRadius: BorderRadius.circular(5),
+                    color: Colors
+                        .white, //background color of dropdown button//border of dropdown button
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   child: DropdownButton(
                     hint: _typeValue.isEmpty
                         ? const Text('Type')
                         : Text(
-                      _typeValue,
-                      style: const TextStyle(color: Colors.black),
-                    ),
+                            _typeValue,
+                            style: const TextStyle(color: Colors.black),
+                          ),
                     isExpanded: true,
-                    icon: const Icon(Icons.keyboard_arrow_down, color: Colors.grey),
+                    icon: const Icon(Icons.keyboard_arrow_down,
+                        color: Colors.grey),
                     iconSize: 30.0,
-                    style: const TextStyle(
-                      color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                     items: ['Sushi', 'Burger', 'Pizza', "Pasta"].map(
-                          (val) {
+                      (val) {
                         return DropdownMenuItem<String>(
                           value: val,
                           child: Text(val),
@@ -85,7 +83,7 @@ class _LandingScreen extends State<LandingScreen> {
                     ).toList(),
                     onChanged: (val) {
                       setState(
-                            () {
+                        () {
                           _typeValue = val.toString();
                         },
                       );
@@ -94,21 +92,24 @@ class _LandingScreen extends State<LandingScreen> {
                 ),
               ),
               CheckboxListTile(
-                title: const Text("Show place photo",
-                  style: TextStyle(color: Colors.white)),
-                value: _photoValue,
-                onChanged: (bool? value) {
-                  setState(() {
-                    _photoValue = value!;
-                  });
-                }),
+                  title: const Text("Show place photo",
+                      style: TextStyle(color: Colors.white)),
+                  value: _photoValue,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      _photoValue = value!;
+                    });
+                  }),
               ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(buttonColor),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(buttonColor),
                   fixedSize: MaterialStateProperty.all(const Size(160, 46)),
                 ),
-                child: const Text('Search',
-                  style: TextStyle(fontSize: 24),),
+                child: const Text(
+                  'Search',
+                  style: TextStyle(fontSize: 24),
+                ),
                 onPressed: () {
                   if (_typeValue.isNotEmpty &&
                       locationController.text.isNotEmpty) {

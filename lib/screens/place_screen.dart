@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import './google_maps.dart';
 import '../services/http_service.dart';
 import '../models/place_model.dart';
 import '../models/photo_model.dart';
@@ -63,14 +64,13 @@ class PlaceScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 24),
               ),
               onPressed: () {
-                /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MapScreen(
-                              location: locationController,
-                              category: _typeValue,
-                              photo: _photoValue)),
-                  );*/
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => GoogleMaps(
+                            place: place,
+                          )),
+                );
               }),
           Text(place.formattedAddress)
         ],
