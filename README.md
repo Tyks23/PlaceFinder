@@ -1,6 +1,6 @@
-# Projekti nimi: PlaceFinder
+# PlaceFinder dokumentatsioon
 
-## Dokumentatsioon:
+## Projekti nimi: PlaceFinder
 
 ## Autorid: 
 Karl Janar Kinkar, Mattias Tüksammel, Liisa Mikkola, Kaarel Eelmäe
