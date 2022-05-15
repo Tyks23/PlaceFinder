@@ -4,6 +4,7 @@ import './google_maps.dart';
 import '../services/http_service.dart';
 import '../models/place_model.dart';
 import '../models/photo_model.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PlaceScreen extends StatelessWidget {
   final HttpService httpService = HttpService();
@@ -15,16 +16,31 @@ class PlaceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var primaryColor = const Color(0xffd7ae9c);
     var buttonColor = const Color(0xff795548);
+    List<Marker> allMarkers = [];
+    allMarkers.add(Marker(
+        markerId: const MarkerId("Location Marker"),
+        draggable: false,
+        position: LatLng(
+            double.parse(place.latitude), double.parse(place.longitude))));
+
+    var _initialCameraPosition = CameraPosition(
+        target:
+            LatLng(double.parse(place.latitude), double.parse(place.longitude)),
+        zoom: 15);
+
     return Scaffold(
-      appBar: AppBar(
+        appBar: AppBar(
+          backgroundColor: primaryColor,
+          centerTitle: true,
+          elevation: 0,
+          title: Text(place.name, style: const TextStyle(fontSize: 26)),
+        ),
         backgroundColor: primaryColor,
-        centerTitle: true,
-        elevation: 0,
-        title: Text(place.name, style: TextStyle(fontSize: 26)),
-      ),
-      backgroundColor: primaryColor,
-      body: Stack(
-        children: [
+        body: Column(children: [
+          Text(place.formattedAddress,
+              style: const TextStyle(fontSize: 22, color: Colors.white)),
+          const Text("Gallery",
+              style: TextStyle(fontSize: 22, color: Colors.white)),
           FutureBuilder(
             future: httpService.getPhotos(id: place.id),
             builder:
@@ -32,20 +48,23 @@ class PlaceScreen extends StatelessWidget {
               if (snapshot.hasData) {
                 List<Photo>? photos = snapshot.data;
                 if (photos != null) {
-                  return ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: photos
-                        .map(
-                          (Photo photo) => Image.network(
-                            photo.prefix != "0"
-                                ? "${photo.prefix}200x200${photo.suffix}"
-                                : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png",
-                            height: 200,
-                            width: 200,
-                          ),
-                        )
-                        .toList(),
-                  );
+                  return SizedBox(
+                      height: 200,
+                      child: ListView(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        children: photos
+                            .map(
+                              (Photo photo) => Image.network(
+                                photo.prefix != "0"
+                                    ? "${photo.prefix}200x200${photo.suffix}"
+                                    : "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png",
+                                height: 200,
+                                width: 200,
+                              ),
+                            )
+                            .toList(),
+                      ));
                 } else {
                   return const Center(child: LinearProgressIndicator());
                 }
@@ -53,6 +72,16 @@ class PlaceScreen extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               }
             },
+          ),
+          const Text("Location",
+              style: TextStyle(fontSize: 22, color: Colors.white)),
+          SizedBox(
+            height: 350.0,
+            width: 350.0,
+            child: GoogleMap(
+              initialCameraPosition: _initialCameraPosition,
+              markers: Set.from(allMarkers),
+            ),
           ),
           ElevatedButton(
               style: ButtonStyle(
@@ -72,9 +101,6 @@ class PlaceScreen extends StatelessWidget {
                           )),
                 );
               }),
-          Text(place.formattedAddress)
-        ],
-      ),
-    );
+        ]));
   }
 }

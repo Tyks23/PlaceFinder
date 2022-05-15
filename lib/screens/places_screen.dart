@@ -32,7 +32,7 @@ class _PlacesScreen extends State<PlacesScreen> {
   });
 
   late final Future<List<Place>> _future =
-  httpService.getPlaces(location: location, category: category);
+      httpService.getPlaces(location: location, category: category);
 
   @override
   Widget build(BuildContext context) {
@@ -60,56 +60,56 @@ class _PlacesScreen extends State<PlacesScreen> {
                   children: places
                       .map(
                         (Place place) => InkWell(
-                      child: Card(
-                        margin: const EdgeInsets.only(
-                            top: 20, right: 20, left: 20),
-                        elevation: 50,
-                        color: secondaryColor,
-                        shadowColor: Colors.white,
-                        child: SizedBox(
-                          height: 320,
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  place.name,
-                                  style: const TextStyle(
-                                    fontSize: 30,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
+                          child: Card(
+                            margin: const EdgeInsets.only(
+                                top: 20, right: 20, left: 20),
+                            elevation: 50,
+                            color: secondaryColor,
+                            shadowColor: Colors.white,
+                            child: SizedBox(
+                              height: 325,
+                              child: Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      place.name,
+                                      style: const TextStyle(
+                                        fontSize: 30,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                    Text(
+                                      place.formattedAddress,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                    Container(
+                                        margin:
+                                            const EdgeInsets.only(top: 20.00),
+                                        child: ImageWidget(id: place.id)),
+                                  ],
                                 ),
-                                Text(
-                                  place.formattedAddress,
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                                Container(
-                                    margin:
-                                    const EdgeInsets.only(top: 20.00),
-                                    child: ImageWidget(id: place.id)),
-                              ],
+                              ),
+                            ),
+                          ),
+                          onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => PlaceScreen(
+                                place: place,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PlaceScreen(
-                            place: place,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
+                      )
                       .toList(),
                 );
               }

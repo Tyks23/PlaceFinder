@@ -10,21 +10,26 @@ class HttpService {
   Future<List<Place>> getPlaces({category, location}) async {
     String placeQuery = "/search?query=$category&near=${location.text}%2C%20EE";
 
-    Response res = await get(Uri.parse(placesURL + placeQuery),
-        headers: {"Authorization": apiKey});
+    try {
+      Response res = await get(Uri.parse(placesURL + placeQuery),
+          headers: {"Authorization": apiKey});
+      if (res.statusCode == 200) {
+        List<dynamic> body = jsonDecode(res.body)["results"];
 
-    if (res.statusCode == 200) {
-      List<dynamic> body = jsonDecode(res.body)["results"];
+        List<Place> places = body
+            .map(
+              (dynamic item) => Place.fromJson(item),
+            )
+            .toList();
 
-      List<Place> places = body
-          .map(
-            (dynamic item) => Place.fromJson(item),
-      )
-          .toList();
+        return places;
+      } else {
+        throw "Unable to retrieve places.";
+      }
+    } catch (e) {
+      List<Place> places = [];
 
       return places;
-    } else {
-      throw "Unable to retrieve places.";
     }
   }
 
@@ -38,7 +43,7 @@ class HttpService {
       List<Photo> photo = body
           .map(
             (dynamic item) => Photo.fromJson(item),
-      )
+          )
           .toList();
       return photo;
     } else {
@@ -57,7 +62,7 @@ class HttpService {
       List<Photo> photos = body
           .map(
             (dynamic item) => Photo.fromJson(item),
-      )
+          )
           .toList();
       return photos;
     } else {
