@@ -19,7 +19,6 @@ class _LandingScreen extends State<LandingScreen> {
   TextEditingController locationController = TextEditingController();
 
   String _typeValue = "";
-  bool _photoValue = false;
 
   // This widget is the root of your application.
   @override
@@ -73,7 +72,16 @@ class _LandingScreen extends State<LandingScreen> {
                         color: Colors.grey),
                     iconSize: 30.0,
                     style: const TextStyle(color: Colors.black),
-                    items: ['Sushi', 'Burger', 'Pizza', "Pasta"].map(
+                    items: [
+                      'Buffet',
+                      'Burger',
+                      'Fusion',
+                      'Kebab',
+                      'Pasta',
+                      'Pizza',
+                      'Sushi',
+                      'Tapas'
+                    ].map(
                       (val) {
                         return DropdownMenuItem<String>(
                           value: val,
@@ -91,15 +99,7 @@ class _LandingScreen extends State<LandingScreen> {
                   ),
                 ),
               ),
-              CheckboxListTile(
-                  title: const Text("Show place photo",
-                      style: TextStyle(color: Colors.white)),
-                  value: _photoValue,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _photoValue = value!;
-                    });
-                  }),
+
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor:
@@ -119,7 +119,7 @@ class _LandingScreen extends State<LandingScreen> {
                           builder: (context) => PlacesScreen(
                               location: locationController,
                               category: _typeValue,
-                              photo: _photoValue)),
+                             )),
                     );
                   }
                 },
