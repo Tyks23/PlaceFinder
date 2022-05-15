@@ -34,6 +34,11 @@ Dart võib kompileerida nii AOT (ahead of time) kui ka JIT (just in time).
 
 -[Flutter API dokumentatsioon](https://api.flutter.dev/)
 
+Teegid: 
+- http
+- google_maps_flutter
+
+
 ## Kerge oli:
 
 - Android Studio installimine - dokumentatsiooni jälgimine ja selle lihtsus
