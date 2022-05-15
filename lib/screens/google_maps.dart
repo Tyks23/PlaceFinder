@@ -10,15 +10,23 @@ class GoogleMaps extends StatelessWidget {
   final Place place;
 
   GoogleMaps({Key? key, required this.place}) : super(key: key);
+  List<Marker> allMarkers = [];
 
-  static const _initialCameraPosition =
-      CameraPosition(target: LatLng(59.399451643677054, 24.637874734549047)
-          //place.latitude, place.longitude
-          );
   @override
   Widget build(BuildContext context) {
+    var _initialCameraPosition = CameraPosition(
+        target:
+            LatLng(double.parse(place.latitude), double.parse(place.longitude)),
+        zoom: 15);
+
     var primaryColor = const Color(0xffd7ae9c);
     var buttonColor = const Color(0xff795548);
+
+    allMarkers.add(Marker(
+        markerId: MarkerId("Location Marker"),
+        draggable: false,
+        position: LatLng(
+            double.parse(place.latitude), double.parse(place.longitude))));
     return Scaffold(
         appBar: AppBar(
           backgroundColor: primaryColor,
@@ -26,8 +34,9 @@ class GoogleMaps extends StatelessWidget {
           elevation: 0,
           title: Text(place.name, style: const TextStyle(fontSize: 26)),
         ),
-        body: const GoogleMap(
+        body: GoogleMap(
           initialCameraPosition: _initialCameraPosition,
+          markers: Set.from(allMarkers),
         ));
   }
 }
