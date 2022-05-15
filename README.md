@@ -50,3 +50,7 @@ Teegid:
 - Emulaatorid ei hakka igal arvutil tööle
 
 ## Ekraanitõmmised rakendusest:
+![ss1](https://user-images.githubusercontent.com/70900290/168491438-e8cb5c40-69a9-40a7-86d6-2c9455d3ae41.png)
+![ss2](https://user-images.githubusercontent.com/70900290/168491441-617e8dec-f7a6-42de-a249-300ec3db0533.png)
+![ss3](https://user-images.githubusercontent.com/70900290/168491444-dc32fd5e-e64c-4f91-b2b2-7a86637bd93e.png)
+
