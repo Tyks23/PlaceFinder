@@ -1,5 +1,7 @@
 # Projekti nimi: PlaceFinder
 
+## Dokumentatsioon:
+
 ## Autorid: 
 Karl Janar Kinkar, Mattias Tüksammel, Liisa Mikkola, Kaarel Eelmäe
 
@@ -25,19 +27,19 @@ Käivita android emulator või ühenda android arvutiga
 $ flutter run <palub valida mitme erineva programmi vahel, milles emulaatorit jooksustada>
 ```
 
-## Dokumentatsioon:
+## Flutter:
 Flutter on Google’i tarkvaraarenduskomplekt mobiilirakendustele, mis kasutab Dart keelt. Dart on modernne, type-safe, ning kergesti ligipääsetav keel. Peamiselt kasutab Javat ja Kotlini. 
 Dart võib kompileerida nii AOT (ahead of time) kui ka JIT (just in time).
 
 -[Flutter API dokumentatsioon](https://api.flutter.dev/)
 
-## Kerge:
+## Kerge oli:
 
 - Android Studio installimine - dokumentatsiooni jälgimine ja selle lihtsus
 - Põhilised näited ja ülesannete lahendusi leidus dokumentatsioonist
 - Keeleliselt sarnane üldiste keeltega, mis lihtsustas koodi kirjutamist
 
-## Raske: 
+## Raske oli: 
 
 - Probleemide korral ei saanud otse abi otsida, kuna Flutter on piisavalt uus
 - Emulaatorid ei hakka igal arvutil tööle
