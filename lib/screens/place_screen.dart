@@ -18,8 +18,7 @@ class PlaceScreen extends StatelessWidget {
         backgroundColor: primaryColor,
         centerTitle: true,
         elevation: 0,
-        title: const Text("PlaceFinder",
-            style: TextStyle(fontSize: 26)),
+        title: Text(place.name, style: TextStyle(fontSize: 26)),
       ),
       backgroundColor: primaryColor,
       body: FutureBuilder(
