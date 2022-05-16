@@ -36,6 +36,7 @@ Dart võib kompileerida nii AOT (ahead of time) kui ka JIT (just in time).
 Teegid: 
 - http
 - google_maps_flutter
+- google_maps_flutter_web
 
 
 ## Kerge oli:
@@ -43,6 +44,7 @@ Teegid:
 - Android Studio installimine - dokumentatsiooni jälgimine ja selle lihtsus
 - Põhilised näited ja ülesannete lahendusi leidus dokumentatsioonist
 - Keeleliselt sarnane üldiste keeltega, mis lihtsustas koodi kirjutamist
+- UI muutmine
 
 ## Raske oli: 
 
