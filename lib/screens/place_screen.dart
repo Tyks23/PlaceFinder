@@ -37,10 +37,23 @@ class PlaceScreen extends StatelessWidget {
         ),
         backgroundColor: primaryColor,
         body: Column(children: [
-          Text(place.formattedAddress,
-              style: const TextStyle(fontSize: 22, color: Colors.white)),
-          const Text("Gallery",
-              style: TextStyle(fontSize: 22, color: Colors.white)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/marker.png',
+                width: 22,
+                height: 22,
+              ),
+              Text(place.formattedAddress,
+                  style: const TextStyle(fontSize: 22, color: Colors.white)),
+            ],
+          ),
+          const Padding(
+            padding: EdgeInsets.only(top: 10.00),
+            child: Text("Gallery",
+                style: TextStyle(fontSize: 22, color: Colors.white)),
+          ),
           FutureBuilder(
             future: httpService.getPhotos(id: place.id),
             builder:
@@ -73,8 +86,11 @@ class PlaceScreen extends StatelessWidget {
               }
             },
           ),
-          const Text("Location",
-              style: TextStyle(fontSize: 22, color: Colors.white)),
+          const Padding(
+            padding: EdgeInsets.only(top: 10.00),
+            child: Text("Location",
+                style: TextStyle(fontSize: 22, color: Colors.white)),
+          ),
           SizedBox(
             height: 350.0,
             width: 350.0,
